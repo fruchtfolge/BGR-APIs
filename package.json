@@ -1,0 +1,34 @@
+{
+  "name": "bgr-apis",
+  "version": "0.0.1",
+  "description": "A server enabling API calls to enquire soil information from BGR",
+  "main": "server.js",
+  "dependencies": {
+    "dom-parser": "^0.1.5",
+    "proj4": "^2.4.3",
+    "@turf/turf": "^4.3.1",
+    "express": "^4.0.0",
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Toffi-123/BGR-APIs.git"
+  },
+  "keywords": [
+    "soil",
+    "soil-quality",
+    "agriculture",
+    "bgr",
+    "soil-types"
+  ],
+  "author": "Christoph Pahmeyer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Toffi-123/BGR-APIs/issues"
+  },
+  "homepage": "https://github.com/Toffi-123/BGR-APIs#readme"
+}
