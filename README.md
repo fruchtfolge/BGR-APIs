@@ -11,7 +11,7 @@ Required parameters
 ```lng``` Longitude  
 ```lat``` Latitude  
 
-Option parameters  
+Optional parameters
 ```layer``` You can specify another layer if you need other information than the soil quality index (defaults to 18)  
 
 
@@ -35,7 +35,7 @@ Option parameters
 | 2     | Gefährdungsindikatorwerte                     |
 
 Example request:  
-```http://localhost:8000/sqr?lng=6.9977272&lat=50.778018```  
+```[http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018)```  
 
 returns:  
 ```json	
@@ -55,7 +55,7 @@ Required parameters
 ```lat``` Latitude  
 
 Example request:  
-```http://localhost:8000/soilType?lng=6.9977272&lat=50.778018```  
+```[http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018)```  
 
 returns:  
 ```json	

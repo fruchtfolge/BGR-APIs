@@ -114,7 +114,7 @@ function soilTypeHtmlParsing (html) {
       return {Ok: {Code: 200, Result: element.getElementsByTagName("td")[3].innerHTML}};
     }
 }
-var server = app.listen(8000, function () {
+var server = app.listen(8002, function () {
 
   var host = server.address().address
   var port = server.address().port
