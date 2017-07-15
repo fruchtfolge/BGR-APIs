@@ -35,7 +35,7 @@ Optional parameters
 | 2     | Gefährdungsindikatorwerte                     |
 
 Example request:  
-```[http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018)```  
+[http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018)
 
 returns:  
 ```json	
@@ -55,7 +55,7 @@ Required parameters
 ```lat``` Latitude  
 
 Example request:  
-```[http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018)```  
+[http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018)
 
 returns:  
 ```json	
