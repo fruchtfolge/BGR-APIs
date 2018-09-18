@@ -1,22 +1,39 @@
-# BGR Soil Maps - APIs
+# BGR Soil Information
 
-The [Bundesanstalt für Geowissenschaften und Rohstoffe (BGR)](https://www.bgr.bund.de/EN/Home/homepage_node_en.html) provides information on soil quality, types and other factors significant for agricultural use in Germany. As the information is available as a mapping service, this repo is aimed at providing an API (via a Node JS server) to the information available.
+The [Bundesanstalt für Geowissenschaften und Rohstoffe (BGR)](https://www.bgr.bund.de/EN/Home/homepage_node_en.html) provides information on soil quality, types and other factors significant for agricultural use in Germany. As the information is solely available as a mapping service, this repo is aimed at providing a Node-JS client API to the information available.
+
+## Installation
+```
+npm install bgr-apis
+```
 
 ## Methods
 
-### ```/sqr```
+### ```sqr(point,layer)```
 
-Returns the soil quality rating (integer) at a given point (see [Mueller et al. (2007)](http://www.zalf.de/de/forschung_lehre/publikationen/Documents/Publikation_Mueller_L/field_mueller.pdf) for infomation on the SQR method).  
-Required parameters  
-```lng``` Longitude  
-```lat``` Latitude  
+```js
+bgr.sqr({
+  type: 'Point',
+  coordinates: [6.9977272,50.778018]
+}, 18)
+.then(res => {
+  // res = 72
+})
+.catch(err => {
+  console.log(err)
+})
+```
+
+Returns the soil quality rating (float) at a given point (see [Mueller et al. (2007)](http://www.zalf.de/de/forschung_lehre/publikationen/Documents/Publikation_Mueller_L/field_mueller.pdf) for infomation on the SQR method).  
+
+`Point` can either be a GeoJSON point, an array of the form `[lng, lat]` or a GeoJSON feature (e.g. a plot). When a plot (GeoJSON feature) is entered, the centroid of the plot is used.
 
 Optional parameters  
-```layer``` You can specify another layer if you need other information than the soil quality index (defaults to 18)  
+`layer` You can specify another layer if you need information other than the soil quality index (defaults to 18)  
 
 
 | Layer | Description (German)                          |
-|-------|-----------------------------------------------|
+|:------|:----------------------------------------------|
 | 18    | Soil Quality Index (default)                  |
 | 17    | Bewertung der Bodenarten                      |
 | 16    | Bewertung des Humusvorrats                    |
@@ -34,39 +51,28 @@ Optional parameters
 | 3     | Ertragslimitierende Faktoren                  |
 | 2     | Gefährdungsindikatorwerte                     |
 
-Example request:  
-[http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/sqr?lng=6.9977272&lat=50.778018)
 
-returns:  
-```json	
-{
-	"Ok": {
-		"Code": 200,
-		"Result": 72
-	}
-}
+
+### ```soilType(point)```
+
+```js
+bgr.soilType({
+  type: 'Point',
+  coordinates: [6.9977272,50.778018]
+})
+.then(res => {
+  // res = 'Lehmsande (ls)'
+})
+.catch(err => {
+  // handle errors
+})
 ```
-
-### ```/soilType```
 
 Returns the soil type (string, UTF-8, german) at a given point.  
-Required parameters  
-```lng``` Longitude  
-```lat``` Latitude  
 
-Example request:  
-[http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018](http://v-server-node.ilb.uni-bonn.de/soilType?lng=6.9977272&lat=50.778018)
+`Point` can either be a GeoJSON point, an array of the form `[lng, lat]` or a GeoJSON feature (e.g. a plot). When a plot (GeoJSON feature) is entered, the centroid of the plot is used.
 
-returns:  
-```json	
-{
-	"Ok": {
-		"Code": 200,
-		"Result": "Lehmsande (ls)"
-	}
-}
-```
+
 
 ## Contribution  
-Contribution is highly appreciated! If you have improvements in code quality and/or additional features just open a pull request or write me a mail. 
-
+Contribution is highly appreciated! If you have improvements in code quality and/or additional features just open a pull.

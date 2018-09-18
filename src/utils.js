@@ -1,13 +1,16 @@
 const proj4 = require("proj4")
 const DomParser = require('dom-parser')
 const https = require('https')
+const bbox = require('@turf/bbox').default
+const buffer = require('@turf/buffer')
+const centroid = require('@turf/centroid').default
 
 module.exports = {
   createBBox(point) {
     const fromProjection = new proj4.Proj('WGS84')
     const toProjection = new proj4.Proj('EPSG:3857')
 
-    const bboxArray = turf.bbox(turf.buffer(point, 0.01, 'kilometers'))
+    const bboxArray = bbox(buffer(point, 0.01, {units:'kilometers'}))
     const boundFirst = bboxArray.splice(0, 2)
     const boundSecond = bboxArray
 
@@ -56,8 +59,6 @@ module.exports = {
         let error
         if (statusCode !== 200) {
           error = 'Request Failed.\n' + `Status Code: ${statusCode}`
-        } else if (!/^application\/json/.test(contentType)) {
-          error = 'Invalid content-type.\n' + `Expected application/json but received ${contentType}`
         }
 
         if (error) {
@@ -94,26 +95,22 @@ module.exports = {
     if (Object.prototype.toString.call(point) === '[object Array]') {
       if (point.length === 2) {
         return {
-          geometry: {
             "type": "Point",
             "coordinates": point
           }
-        }
       }
     // when object is passed
-    } else if (typeof point === 'Object') {
+  } else if (typeof point === 'object') {
       if (point.type === 'Point' && point.coordinates.length === 2) {
-        return {
-          geometry: point
-        }
+        return point
+      } else if (point.type === 'Feature') {
+        return centroid(point)
       } else {
-        return {
-          error: this.invalidRequest()
-        }
+        return new Error(this.invalidRequest())
       }
     // when a string is passed
     } else {
-      return this.invalidRequest()
+      return new Error(this.invalidRequest())
     }
   }
 }
