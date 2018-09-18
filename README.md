@@ -11,7 +11,7 @@ Required parameters
 ```lng``` Longitude  
 ```lat``` Latitude  
 
-Optional parameters
+Optional parameters  
 ```layer``` You can specify another layer if you need other information than the soil quality index (defaults to 18)  
 
 
