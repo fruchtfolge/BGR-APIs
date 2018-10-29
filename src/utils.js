@@ -1,6 +1,6 @@
 let proj4 = require('proj4')
 // hack to ensure compatibilty to ES6 modules from Fruchtfolge main repo
-if (!proj4) {
+if (proj4.default) {
   proj4 = require('proj4').default
 }
 const DomParser = require('dom-parser')
