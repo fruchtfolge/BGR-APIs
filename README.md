@@ -69,10 +69,63 @@ bgr.soilType({
 ```
 
 Returns the soil type (string, UTF-8, german) at a given point.  
+Possible categories are:
+
+| Soil Types        |
+|:------------------|
+| Reinsande (ss)    |
+| Lehmsande (ls)    |
+| Schluffsande (us) |
+| Sandlehme (sl)    |
+| Normallehme (ll)  |
+| Tonlehme (tl)     |
+| Lehmschluffe (lu) |
+| Tonschluffe (tu)  |
+| Schlufftone (ut)  |
+| Moore (mo)        |
+| Watt              |
+| Siedlung          |
+| Abbauflächen      |
+| Gewässer          |
 
 `Point` can either be a GeoJSON point, an array of the form `[lng, lat]` or a GeoJSON feature (e.g. a plot). When a plot (GeoJSON feature) is entered, the centroid of the plot is used.
 
+### ```humusContent(point)```
 
+```js
+bgr.humusContent({
+  type: 'Point',
+  coordinates: [8.350689,52.087511]
+})
+.then(res => {
+  // res = '2 - <3%'
+})
+.catch(err => {
+  // handle errors
+})
+```
+
+Return the humus content (string, UTF-8, german) for a given point.
+Possible categories are:
+
+| Humus content   |
+|:----------------|
+| 1 - <2%         |
+| 2 - <3%         |
+| 3 - <4%         |
+| 4 - <6%         |
+| 6 - <8%         |
+| 8 - <11,5%      |
+| 11,5 - <15%     |
+| 15 - <30%       |
+| ≥30%            |
+| Wattflächen     |
+| Gewässerflächen |
+| Siedlungen      |
+| Abbauflächen    |
+| nicht bestimmt  |
+
+`Point` can either be a GeoJSON point, an array of the form `[lng, lat]` or a GeoJSON feature (e.g. a plot). When a plot (GeoJSON feature) is entered, the centroid of the plot is used.
 
 ## Contribution  
 Contribution is highly appreciated! If you have improvements in code quality and/or additional features just open a pull.

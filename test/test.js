@@ -33,6 +33,36 @@ bgr.sqr(plotGeometry, 18)
     console.log(err)
   })
 
+// check humus content for point
+bgr.humusContent({
+  type: 'Point',
+  coordinates: [8.350689,52.087511]
+})
+  .then(res => {
+    assert.deepStrictEqual(res,'2 - <3%')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+// check humus content for point as array
+bgr.humusContent([8.350689,52.087511])
+  .then(res => {
+    assert.deepStrictEqual(res,'2 - <3%')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+// humusContent for point given as plot geometry
+bgr.humusContent(plotGeometry)
+  .then(res => {
+    assert.deepStrictEqual(res,'2 - <3%')
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
 // soil type for point
 bgr.soilType({
   type: 'Point',
