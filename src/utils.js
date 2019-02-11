@@ -109,7 +109,7 @@ module.exports = {
     } else if (typeof point === 'object') {
       if (point.type === 'Point' && point.coordinates.length === 2) {
         return point
-      } else if (point.type === 'Feature') {
+      } else if (point.type === 'Feature' || point.type === 'Polygon') {
         return centroid(point)
       } else {
         return new Error(this.invalidRequest())
