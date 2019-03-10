@@ -1,6 +1,6 @@
 {
   "name": "bgr-apis",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Soil quality API covering Germany with data from BGR",
   "main": "index.js",
   "dependencies": {
