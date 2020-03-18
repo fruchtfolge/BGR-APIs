@@ -45,11 +45,11 @@ module.exports = {
     }
   },
 
-  soilTypeHtmlParsing(html) {
+  soilTypeHtmlParsing(html, cell) {
     const parser = new DomParser()
     const element = parser.parseFromString(html, 'text/html')
-    if (element.getElementsByTagName('td')[5]) {
-      return element.getElementsByTagName('td')[5].innerHTML
+    if (element.getElementsByTagName('td')[cell]) {
+      return element.getElementsByTagName('td')[cell].innerHTML
     } else {
       return noInfo
     }

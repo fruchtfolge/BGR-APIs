@@ -21,7 +21,7 @@ module.exports = {
 
       utils.request(options)
         .then(res => {
-          resolve(utils.soilTypeHtmlParsing(res))
+          resolve(utils.soilTypeHtmlParsing(res,5))
         })
         .catch(error => {
           reject(error)
@@ -43,13 +43,13 @@ module.exports = {
       const options = {
         hostname: 'services.bgr.de',
         port: 443,
-        path: `/wms/boden/bodeneigenschaften/?&REQUEST=GetFeatureInfo&SERVICE=WMS&CRS=EPSG%3A3857&STYLES=default&TRANSPARENT=true&VERSION=1.3.0&FORMAT=image%2Fpng&BBOX=${utils.createBBox(geometry)}&HEIGHT=880&WIDTH=514&LAYERS=1&QUERY_LAYERS=1&INFO_FORMAT=text%2Fhtml&I=452&J=371`,
+        path: `/wms/boden/humus1000ob/?&REQUEST=GetFeatureInfo&SERVICE=WMS&CRS=EPSG%3A3857&STYLES=default&TRANSPARENT=true&VERSION=1.3.0&FORMAT=image%2Fpng&BBOX=${utils.createBBox(geometry)}&HEIGHT=880&WIDTH=514&LAYERS=0&QUERY_LAYERS=0&INFO_FORMAT=text%2Fhtml&I=452&J=371`,
         method: 'GET'
       }
 
       utils.request(options)
         .then(res => {
-          resolve(utils.soilTypeHtmlParsing(res))
+          resolve(utils.soilTypeHtmlParsing(res,3))
         })
         .catch(error => {
           reject(error)
