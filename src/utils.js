@@ -48,8 +48,8 @@ module.exports = {
   soilTypeHtmlParsing(html) {
     const parser = new DomParser()
     const element = parser.parseFromString(html, 'text/html')
-    if (element.getElementsByTagName('td')[3]) {
-      return element.getElementsByTagName('td')[3].innerHTML
+    if (element.getElementsByTagName('td')[5]) {
+      return element.getElementsByTagName('td')[5].innerHTML
     } else {
       return noInfo
     }

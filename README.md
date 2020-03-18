@@ -15,7 +15,7 @@ npm install bgr-apis
 bgr.sqr({
   type: 'Point',
   coordinates: [6.9977272,50.778018]
-}, 18)
+}, 32)
 .then(res => {
   // res = 72
 })
@@ -29,26 +29,26 @@ Returns the soil quality rating (float) at a given point (see [Mueller et al. (2
 `Point` can either be a GeoJSON point, an array of the form `[lng, lat]` or a GeoJSON feature (e.g. a plot). When a plot (GeoJSON feature) is entered, the centroid of the plot is used.
 
 Optional parameters  
-`layer` You can specify another layer if you need information other than the soil quality index (defaults to 18)  
+`layer` You can specify another layer if you need information other than the soil quality index (defaults to 32)  
 
 
 | Layer | Description (German)                          |
 |:------|:----------------------------------------------|
-| 18    | Soil Quality Index (default)                  |
-| 17    | Bewertung der Bodenarten                      |
-| 16    | Bewertung des Humusvorrats                    |
-| 15    | Bewertung der Bodenstruktur                   |
-| 14    | Bewertung der Packungsdichte                  |
-| 13    | Bewertung der effektiven Durchwurzelungstiefe |
-| 12    | Bewertung des Bodenwasserdargebots            |
-| 11    | Bewertung des mittleren Grundwassertiefstands |
-| 10    | Bewertung der Hangneigung                     |
-| 9     | Bewertung der standörtlichen Bodengüte        |
-| 7     | Bewertung der Versauerungsgefährdung          |
-| 6     | Bewertung der Gründigkeit                     |
-| 5     | Bewertung der Trockenheitsgefährdung          |
-| 4     | Bewertung des Steingehaltes im Wurzelraum     |
-| 3     | Ertragslimitierende Faktoren                  |
+| 32    | Soil Quality Index (default)                  |
+| 31    | Bewertung der Bodenarten                      |
+| 29    | Bewertung des Humusvorrats                    |
+| 27    | Bewertung der Bodenstruktur                   |
+| 25    | Bewertung der Packungsdichte                  |
+| 23    | Bewertung der effektiven Durchwurzelungstiefe |
+| 21    | Bewertung des Bodenwasserdargebots            |
+| 19    | Bewertung des mittleren Grundwassertiefstands |
+| 17    | Bewertung der Hangneigung                     |
+| 15    | Bewertung der standörtlichen Bodengüte        |
+| 12    | Bewertung der Versauerungsgefährdung          |
+| 10    | Bewertung der Gründigkeit                     |
+| 8     | Bewertung der Trockenheitsgefährdung          |
+| 6     | Bewertung des Steingehaltes im Wurzelraum     |
+| 4     | Ertragslimitierende Faktoren                  |
 | 2     | Gefährdungsindikatorwerte                     |
 
 

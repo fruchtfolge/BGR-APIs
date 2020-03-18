@@ -60,7 +60,7 @@ module.exports = {
   sqr(point, layer) {
     return new Promise((resolve,reject) => {
       if (!point) return reject(this.invalidRequest)
-      if (!layer) layer = 18
+      if (!layer) layer = 32
 
       let geometry
       try {
