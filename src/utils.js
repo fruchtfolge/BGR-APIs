@@ -1,30 +1,13 @@
-let proj4 = require('proj4')
-// hack to ensure compatibilty to ES6 modules from Fruchtfolge main repo
-if (proj4.default) {
-  proj4 = require('proj4').default
-}
-const DomParser = require('dom-parser')
-const https = require('https')
-const bbox = require('@turf/bbox').default
-const buffer = require('@turf/buffer').default
-const centroid = require('@turf/centroid').default
+import fetch from 'node-fetch'
+import DomParser from 'dom-parser'
+import { bbox, buffer, centroid, toMercator } from '@turf/turf'
 
 const noInfo = 'No information available for given query'
 
-module.exports = {
+export default {
   createBBox(point) {
-    const fromProjection = new proj4.Proj('WGS84')
-    const toProjection = new proj4.Proj('EPSG:3857')
-
-    const bboxArray = bbox(buffer(point, 0.01, {units:'kilometers'}))
-    const boundFirst = bboxArray.splice(0, 2)
-    const boundSecond = bboxArray
-
-    const reprojectionFirst = proj4(fromProjection, toProjection, boundFirst)
-    const reprojectionSecond = proj4(fromProjection, toProjection, boundSecond)
-
-    const bboxString = reprojectionFirst.concat(reprojectionSecond).toString().replace(/,/g, '%2C')
-    return bboxString
+    const bboxArray = bbox(toMercator(buffer(point, 0.01, {units:'kilometers'})))
+    return bboxArray.join('%2C')
   },
 
   sqrHtmlParsing(html) {
@@ -55,45 +38,10 @@ module.exports = {
     }
   },
 
-  request(url) {
-    return new Promise((resolve, reject) => {
-      https.get(url, (res) => {
-        const {
-          statusCode
-        } = res
-
-        let error
-        if (statusCode !== 200) {
-          error = 'Request Failed.\n' + `Status Code: ${statusCode}`
-        }
-
-        if (error) {
-          reject(error)
-          res.resume()
-          return
-        }
-
-        res.setEncoding('utf8')
-        let html = ''
-        res.on('data', (chunk) => {
-          html += chunk
-        })
-        res.on('end', () => {
-          resolve(html)
-        })
-
-      }).on('error', (error) => {
-        reject(error)
-      })
-    })
-  },
-
-  invalidRequest() {
-    return 'Invalid request.'
-  },
-
-  noInfo() {
-    return 'No soil information available for given point.'
+  async request(url) {
+    const response = await fetch(url)
+    const body = await response.text()
+    return body
   },
 
   createGeometry(point) {
@@ -112,11 +60,11 @@ module.exports = {
       } else if (point.type === 'Feature' || point.type === 'Polygon') {
         return centroid(point)
       } else {
-        return new Error(this.invalidRequest())
+        throw new Error('Invalid GeoJSON')
       }
       // when a string is passed
     } else {
-      return new Error(this.invalidRequest())
+      throw new Error('BGR function expected array of point coordinates, or a valid GeoJSON feature object. Received string instead.')
     }
   }
 }
