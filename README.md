@@ -3,8 +3,18 @@
 The [Bundesanstalt für Geowissenschaften und Rohstoffe (BGR)](https://www.bgr.bund.de/EN/Home/homepage_node_en.html) provides information on soil quality, types and other factors significant for agricultural use in Germany. As the information is solely available as a mapping service, this repo is aimed at providing a Node-JS client API to the information available.
 
 ## Installation
+
+### Node.js / module bundlers
 ```
 npm install bgr-apis
+```
+
+### Browser
+Download the [minified file](https://raw.githubusercontent.com/fruchtfolge/BGR-APIs/master/dist/bgr.min.js), and include it in a script tag. This will expose a global variable named `bgr`. 
+This module requires the global variable `turf` exported from `@turf/turf` to be available, as well as browser support for the [fetch API](https://developer.mozilla.org/de/docs/Web/API/Fetch_API). 
+```html
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+<script src="bgr.min.js" charset="utf-8"></script>
 ```
 
 ## Methods
@@ -127,5 +137,12 @@ Possible categories are:
 
 `Point` can either be a GeoJSON point, an array of the form `[lng, lat]` or a GeoJSON feature (e.g. a plot). When a plot (GeoJSON feature) is entered, the centroid of the plot is used.
 
-## Contribution  
-Contribution is highly appreciated! If you have improvements in code quality and/or additional features just open a pull.
+## Contribution
+Contribution is highly appreciated 👍!  
+Please open an issue in case of questions / bug reports or a pull request if you implemented a new feature / bug fix.  
+In the latter case, please make sure to run `npm test` (and adapt `test/test.js` to your changes) and / or update the `README` 🙂
+
+## License
+MIT @Christoph Pahmeyer
+
+This software is crafted with :heart: at the [University of Bonn - EMAS Group](https://www.ilr.uni-bonn.de/em/em_e.htm)
