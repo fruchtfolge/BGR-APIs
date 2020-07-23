@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Test BGR-API package in the browser</title>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5.1.6/turf.min.js"></script>
+    <script src="../dist/bgr.min.js"></script>
+  </head>
+  <body>
+    <div id="status">
+      Running...
+    </div>
+    <script type="text/javascript">
+      const status = document.getElementById('status')
+      const plotGeometry = {
+        "type": "Feature",
+        "properties": {
+          "name": "1",
+          "id": "1"
+        },
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [8.472359282984609, 52.098940574732026],
+              [8.472385841011695, 52.09888405181575],
+              [8.472541458742908, 52.098705607139166],
+              [8.472664055554583, 52.09858672762726],
+              [8.472745844081068, 52.098502499839256],
+              [8.473077777958407, 52.09813594759476],
+              [8.473632197332014, 52.09814014501764],
+              [8.475482330304995, 52.0982115903363],
+              [8.475920404239684, 52.09823183315378],
+              [8.47742474945971, 52.09823849626592],
+              [8.47750387554873, 52.09824000139136],
+              [8.477296712383492, 52.09937612246312],
+              [8.477214758007113, 52.09936312148708],
+              [8.47698713952333, 52.09935257892118],
+              [8.476785502568358, 52.099341574902894],
+              [8.47600993138795, 52.09932525914868],
+              [8.475115881120201, 52.09930881547615],
+              [8.47454397874537, 52.099295856537175],
+              [8.473916828515828, 52.099281634139224],
+              [8.473577919894248, 52.09927260230557],
+              [8.47355993067331, 52.09927213537339],
+              [8.473389282086671, 52.09926068849093],
+              [8.473339776614914, 52.09925736729662],
+              [8.47315219767625, 52.099229937742344],
+              [8.473015646461512, 52.09920278003861],
+              [8.47287497373195, 52.099161413412745],
+              [8.472728963971086, 52.09910728714095],
+              [8.472552781073777, 52.099026711139864],
+              [8.472359282984609, 52.098940574732026]
+            ]
+          ]
+        }
+      }
+      
+      ;(async () => {
+        try {
+          // Test soil quality for given point as GeoJSON
+          const sqrPoint = await bgr.sqr({
+            type: 'Point',
+            coordinates: [6.9977272, 50.778018]
+          }, 32)
+          if (sqrPoint !== 72) {
+            status.innerHTML += '<br>Expected ' + 72  + ' but got ' + sqrPoint
+          }
+        } catch (e) {
+          console.error(e)
+        }
+
+        // same point as array
+        try {
+          const sqrArr = await bgr.sqr({
+            type: 'Point',
+            coordinates: [6.9977272, 50.778018]
+          }, 32)
+          if (sqrArr !== 72) {
+            status.innerHTML += '<br>Expected ' + 72 + ' but got ' + sqrArr
+          }
+        } catch (e) {
+          console.error(e)
+        }
+        
+        // testing a plot
+        try {
+          const sqrPlot = await bgr.sqr(plotGeometry, 32)
+          if (sqrPlot !== 70.5) {
+            status.innerHTML += '<br>Expected ' + 70.5 + ' but got ' + sqrPlot
+          }
+        } catch (e) {
+          console.error(e)
+        }
+        
+        console.log('Finished running all SQR tests')
+        
+        try {
+          // check humus content for point
+          const humusPoint = await bgr.humusContent({
+            type: 'Point',
+            coordinates: [6.9977272, 50.778018]
+          })
+          if (humusPoint !== 'nicht bestimmt') {
+            status.innerHTML += '<br>Expected ' + 'nicht bestimmt' + ' but got ' + humusPoint
+          }
+        } catch (e) {
+          console.error(e)
+        }
+
+        // check humus content for point as array
+        try {
+          const humusArr = await bgr.humusContent({
+            type: 'Point',
+            coordinates: [6.9977272, 50.778018]
+          })
+          if (humusArr !== 'nicht bestimmt') {
+            status.innerHTML += '<br>Expected ' + 'nicht bestimmt' + ' but got ' + humusArr
+          }
+        } catch (e) {
+          console.error(e)
+        }
+        
+        // humusContent for point given as plot geometry
+        try {
+          const humusPlot = await bgr.humusContent(plotGeometry)
+          if (humusPlot !== '2 - <3%') {
+            status.innerHTML += '<br>Expected ' + '2 - <3%' + ' but got ' + humusPlot
+          }
+        } catch (e) {
+          console.error(e)
+        }
+        
+        console.log('Finished running all humus content tests')
+        
+        try {
+          // check soil type for point
+          const soilTypePoint = await bgr.soilType({
+            type: 'Point',
+            coordinates: [6.9977272, 50.778018]
+          })
+          if (soilTypePoint !== 'Lehmsande (ls)') {
+            status.innerHTML += '<br>Expected ' + 'Lehmsande (ls)' + ' but got ' + soilTypePoint
+          }
+        } catch (e) {
+          console.error(e)
+        }
+
+        // check soil type for point as array
+        try {
+          const soilTypeArr = await bgr.soilType({
+            type: 'Point',
+            coordinates: [6.9977272, 50.778018]
+          })
+          if (soilTypeArr !== 'Lehmsande (ls)') {
+            status.innerHTML += '<br>Expected ' + 'Lehmsande (ls)' + ' but got ' + soilTypeArr
+          }
+        } catch (e) {
+          console.error(e)
+        }
+        
+        // soil type for point given as plot geometry
+        try {
+          const soilTypePlot = await bgr.soilType(plotGeometry)
+          if (soilTypePlot !== 'Tonschluffe (tu)') {
+            status.innerHTML += '<br>Expected ' + 'Tonschluffe (tu)' + ' but got ' + soilTypePlot
+          }
+        } catch (e) {
+          console.error(e)
+        }
+        
+        console.log('Finished running all soil type tests')
+        
+        if (status.innerHTML === "\n      Running...\n    ") status.innerHTML = 'Passed all tests'
+      })()
+    </script>
+  </body>
+</html>
