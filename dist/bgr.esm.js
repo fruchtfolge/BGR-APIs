@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import DomParser from 'dom-parser';
+import * as DomParser from 'dom-parser';
 import { bbox, toMercator, buffer, centroid } from '@turf/turf';
 
 const noInfo = 'No information available for given query';

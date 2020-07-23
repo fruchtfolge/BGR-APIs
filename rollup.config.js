@@ -21,12 +21,29 @@ export default [
       }
     },
     plugins: [
-      resolve({
-        module: true,
-        jsnext: true,
-        main: true
-      }),
-      commonjs(),
+      resolve(),
+      // commonjs(),
+      terser()
+    ]
+  },
+  {
+    input: 'index.js',
+    external: [
+      '@turf/turf',
+      'node-fetch'
+    ],
+    output: {
+      name: 'bgr',
+      file: pkg.amd,
+      format: 'amd',
+      globals: {
+        '@turf/turf': 'turf',
+        'node-fetch': 'fetch'
+      }
+    },
+    plugins: [
+      resolve(),
+      // commonjs(),
       terser()
     ]
   },

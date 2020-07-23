@@ -3,7 +3,7 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var fetch = _interopDefault(require('node-fetch'));
-var DomParser = _interopDefault(require('dom-parser'));
+var DomParser = require('dom-parser');
 var turf = require('@turf/turf');
 
 const noInfo = 'No information available for given query';

@@ -5,6 +5,7 @@
   "main": "dist/bgr.cjs.js",
   "module": "dist/bgr.esm.js",
   "browser": "dist/bgr.min.js",
+  "amd": "dist/bgr.amd.js",
   "dependencies": {
     "@turf/turf": "^5.1.6",
     "dom-parser": "^0.1.6",
