@@ -36,6 +36,19 @@ const plotGeometry = require("./plot.json")
     process.exit()
   }
   
+  // testing throwing of errors
+  let thrown = false
+  try {
+    const sqrPlot = await bgr.sqr("no valid input", 32)
+  } catch (e) {
+    // expected to throw an error
+    thrown = true
+  }
+  if (!thrown) {
+    console.error('Should have thrown error on invalid input')
+    process.exit()
+  }
+  
   console.log('Passed all SQR tests')
   
   try {
